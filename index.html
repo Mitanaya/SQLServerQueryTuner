@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Server Query Tuner | Optimize Your Queries</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-tachometer-alt"></i>
+                <h1>SQL Server Query Tuner</h1>
+            </div>
+            <p class="tagline">Optimize your queries with intelligent recommendations</p>
+        </header>
+
+        <div class="main-content">
+            <div class="query-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-code"></i> SQL Query</h2>
+                    <div class="actions">
+                        <button id="format-btn" class="btn btn-secondary">
+                            <i class="fas fa-align-left"></i> Format
+                        </button>
+                        <button id="clear-btn" class="btn btn-secondary">
+                            <i class="fas fa-trash"></i> Clear
+                        </button>
+                    </div>
+                </div>
+                <textarea id="sql-query" placeholder="Enter your SQL query here..."></textarea>
+            </div>
+
+            <div class="index-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-table"></i> Table Index Definitions</h2>
+                    <button id="add-table-btn" class="btn btn-secondary">
+                        <i class="fas fa-plus"></i> Add Table
+                    </button>
+                </div>
+                <div id="tables-container">
+                    <!-- Tables will be added here dynamically -->
+                    <div class="empty-state">
+                        <i class="fas fa-table"></i>
+                        <p>Add tables used in your query to define their indexes</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions-section">
+                <button id="analyze-btn" class="btn btn-primary">
+                    <i class="fas fa-magic"></i> Analyze Query
+                </button>
+                <div class="resources-dropdown">
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-book"></i> Free Resources <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="https://learn.microsoft.com/en-us/sql/relational-databases/performance/monitoring-performance-by-using-the-query-store" target="_blank">Query Store Docs</a>
+                        <a href="https://www.brentozar.com/sql/syntax/" target="_blank">SQL Syntax Reference</a>
+                        <a href="https://sqlperformance.com/" target="_blank">SQL Performance Blog</a>
+                        <a href="https://github.com/Microsoft/sql-server-samples" target="_blank">SQL Server Samples</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="execution-plan">Execution Plan</button>
+                    <button class="tab-btn" data-tab="recommendations">Recommendations</button>
+                    <button class="tab-btn" data-tab="statistics">Statistics</button>
+                </div>
+                <div class="tab-content active" id="execution-plan">
+                    <div class="empty-state">
+                        <i class="fas fa-project-diagram"></i>
+                        <p>Analyze your query to view the execution plan</p>
+                    </div>
+                </div>
+                <div class="tab-content" id="recommendations">
+                    <div class="empty-state">
+                        <i class="fas fa-lightbulb"></i>
+                        <p>Get optimization recommendations by analyzing your query</p>
+                    </div>
+                </div>
+                <div class="tab-content" id="statistics">
+                    <div class="empty-state">
+                        <i class="fas fa-chart-bar"></i>
+                        <p>View performance statistics after analyzing your query</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>SQL Server Query Tuner - Free tool for developers</p>
+            <p>Follow database best practices and improve query performance</p>
+        </footer>
+    </div>
+
+    <!-- Table Index Modal -->
+    <div id="table-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add Table Indexes</h2>
+            <div class="form-group">
+                <label for="table-name">Table Name</label>
+                <input type="text" id="table-name" placeholder="Enter table name">
+            </div>
+            <div class="form-group">
+                <label for="index-definitions">Index Definitions (one per line)</label>
+                <textarea id="index-definitions" placeholder="Example: 
+CREATE INDEX IX_Customer_Name ON Customers(LastName, FirstName) INCLUDE (Email);
+CREATE CLUSTERED INDEX PK_Orders ON Orders(OrderID);"></textarea>
+            </div>
+            <button id="save-table-btn" class="btn btn-primary">Save Table</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
